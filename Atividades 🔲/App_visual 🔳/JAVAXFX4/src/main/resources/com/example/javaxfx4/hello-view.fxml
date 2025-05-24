@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="251.0" prefWidth="233.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaxfx4.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Label text="Selecione a data do seu nascimento:" />
+   <MenuButton mnemonicParsing="false" text="Dia">
+     <items>
+       <MenuItem mnemonicParsing="false" text="01" />
+       <MenuItem mnemonicParsing="false" text="02" />
+         <MenuItem mnemonicParsing="false" text="03" />
+         <MenuItem mnemonicParsing="false" text="04" />
+         <MenuItem mnemonicParsing="false" text="05" />
+         <MenuItem mnemonicParsing="false" text="06" />
+         <MenuItem mnemonicParsing="false" text="07" />
+         <MenuItem mnemonicParsing="false" text="08" />
+         <MenuItem mnemonicParsing="false" text="09" />
+         <MenuItem mnemonicParsing="false" text="10" />
+         <MenuItem mnemonicParsing="false" text="11" />
+         <MenuItem mnemonicParsing="false" text="12" />
+         <MenuItem mnemonicParsing="false" text="13" />
+         <MenuItem mnemonicParsing="false" text="14" />
+         <MenuItem mnemonicParsing="false" text="15" />
+         <MenuItem mnemonicParsing="false" text="16" />
+         <MenuItem mnemonicParsing="false" text="17" />
+         <MenuItem mnemonicParsing="false" text="18" />
+         <MenuItem mnemonicParsing="false" text="19" />
+         <MenuItem mnemonicParsing="false" text="20" />
+         <MenuItem mnemonicParsing="false" text="21" />
+         <MenuItem mnemonicParsing="false" text="22" />
+         <MenuItem mnemonicParsing="false" text="23" />
+         <MenuItem mnemonicParsing="false" text="24" />
+         <MenuItem mnemonicParsing="false" text="25" />
+         <MenuItem mnemonicParsing="false" text="26" />
+         <MenuItem mnemonicParsing="false" text="27" />
+         <MenuItem mnemonicParsing="false" text="28" />
+         <MenuItem mnemonicParsing="false" text="29" />
+         <MenuItem mnemonicParsing="false" text="30" />
+         <MenuItem mnemonicParsing="false" text="31" />
+     </items>
+      <VBox.margin>
+         <Insets bottom="-1.0" left="-140.0" />
+      </VBox.margin>
+   </MenuButton>
+   <MenuButton layoutX="101.0" layoutY="67.0" mnemonicParsing="false" text="Mes">
+      <items>
+         <MenuItem mnemonicParsing="false" text="Janeiro" />
+         <MenuItem mnemonicParsing="false" text="Fevereiro" />
+         <MenuItem mnemonicParsing="false" text="Março" />
+         <MenuItem mnemonicParsing="false" text="Abril" />
+         <MenuItem mnemonicParsing="false" text="Maio" />
+         <MenuItem mnemonicParsing="false" text="Junho" />
+         <MenuItem mnemonicParsing="false" text="Julho" />
+         <MenuItem mnemonicParsing="false" text="Agosto" />
+         <MenuItem mnemonicParsing="false" text="Setembro" />
+         <MenuItem mnemonicParsing="false" text="Outubro" />
+         <MenuItem mnemonicParsing="false" text="Novembro" />
+         <MenuItem mnemonicParsing="false" text="Dezembro" />
+      </items>
+      <VBox.margin>
+         <Insets top="-44.0" />
+      </VBox.margin>
+   </MenuButton>
+   <MenuButton layoutX="101.0" layoutY="113.0" mnemonicParsing="false" text="Ano">
+      <items>
+         <MenuItem mnemonicParsing="false" text="2025" />
+         <MenuItem mnemonicParsing="false" text="2024" />
+         <MenuItem mnemonicParsing="false" text="2023" />
+         <MenuItem mnemonicParsing="false" text="2022" />
+         <MenuItem mnemonicParsing="false" text="2023" />
+         <MenuItem mnemonicParsing="false" text="2022" />
+         <MenuItem mnemonicParsing="false" text="2021" />
+         <MenuItem mnemonicParsing="false" text="2020" />
+         <MenuItem mnemonicParsing="false" text="2019" />
+         <MenuItem mnemonicParsing="false" text="2018" />
+         <MenuItem mnemonicParsing="false" text="2017" />
+         <MenuItem mnemonicParsing="false" text="2016" />
+         <MenuItem mnemonicParsing="false" text="2015" />
+         <MenuItem mnemonicParsing="false" text="2014" />
+         <MenuItem mnemonicParsing="false" text="2013" />
+         <MenuItem mnemonicParsing="false" text="2012" />
+         <MenuItem mnemonicParsing="false" text="2011" />
+         <MenuItem mnemonicParsing="false" text="2010" />
+         <MenuItem mnemonicParsing="false" text="2009" />
+         <MenuItem mnemonicParsing="false" text="2008" />
+         <MenuItem mnemonicParsing="false" text="2007" />
+         <MenuItem mnemonicParsing="false" text="2006" />
+         <MenuItem mnemonicParsing="false" text="2005" />
+         <MenuItem mnemonicParsing="false" text="2004" />
+         <MenuItem mnemonicParsing="false" text="2003" />
+         <MenuItem mnemonicParsing="false" text="2002" />
+         <MenuItem mnemonicParsing="false" text="2001" />
+         <MenuItem mnemonicParsing="false" text="2000" />
+         <MenuItem mnemonicParsing="false" text="1999" />
+         <MenuItem mnemonicParsing="false" text="1998" />
+         <MenuItem mnemonicParsing="false" text="1997" />
+         <MenuItem mnemonicParsing="false" text="1996" />
+         <MenuItem mnemonicParsing="false" text="1995" />
+         <MenuItem mnemonicParsing="false" text="1994" />
+         <MenuItem mnemonicParsing="false" text="1993" />
+         <MenuItem mnemonicParsing="false" text="1992" />
+         <MenuItem mnemonicParsing="false" text="1991" />
+         <MenuItem mnemonicParsing="false" text="1990" />
+      </items>
+      <VBox.margin>
+         <Insets right="-140.0" top="-46.0" />
+      </VBox.margin>
+   </MenuButton>
+   <Button mnemonicParsing="false" text="Verificar" />
+</VBox>

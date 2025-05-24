@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="399b501e-9950-4232-9dae-ca9497fa3032" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../FOR_e_DoWhile/EX22.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FOR_e_DoWhile/EX23.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BASICOS/EX1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../BASICOS/EX1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/Atividades-Senai/BASICOS/EX1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../out/production/Atividades-Senai/BASICOS/EX1.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GabrielTurok"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/GabrielTurok/Atividades-Senai.git",
+    "accountId": "2b9d7285-9a07-4fc4-a421-278f76257288"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2srvvS5puoV8vSszi1gK75rnTT9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Repo/Atividades-Senai/Atividades/AttTringulo"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="399b501e-9950-4232-9dae-ca9497fa3032" name="Changes" comment="" />
+      <created>1739226739080</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739226739080</updated>
+    </task>
+    <servers />
+  </component>
+</project>

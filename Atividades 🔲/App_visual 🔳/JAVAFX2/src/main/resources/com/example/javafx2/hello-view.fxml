@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="285.0" prefWidth="335.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx2.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="1º Nota" translateY="-40.0">
+     <items>
+       <MenuItem mnemonicParsing="false" text="1" />
+         <MenuItem mnemonicParsing="false" text="2" />
+         <MenuItem mnemonicParsing="false" text="3" />
+         <MenuItem mnemonicParsing="false" text="4" />
+         <MenuItem mnemonicParsing="false" text="5" />
+         <MenuItem mnemonicParsing="false" text="6" />
+         <MenuItem mnemonicParsing="false" text="7" />
+         <MenuItem mnemonicParsing="false" text="8" />
+         <MenuItem mnemonicParsing="false" text="9" />
+         <MenuItem mnemonicParsing="false" text="10" />
+     </items>
+      <VBox.margin>
+         <Insets bottom="-50.0" />
+      </VBox.margin>
+   </MenuButton>
+   <MenuButton layoutX="132.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="2º Nota">
+      <items>
+         <MenuItem mnemonicParsing="false" text="1" />
+         <MenuItem mnemonicParsing="false" text="2" />
+      </items>
+   </MenuButton>
+
+    <Label fx:id="welcomeText" cache="true" cacheHint="QUALITY" text="Calculo da Nota" translateY="-120.0">
+      <opaqueInsets>
+         <Insets />
+      </opaqueInsets>
+      <effect>
+         <InnerShadow />
+      </effect></Label>
+   <MenuButton layoutX="132.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="3º Nota">
+      <items>
+         <MenuItem mnemonicParsing="false" text="1" />
+         <MenuItem mnemonicParsing="false" text="2" />
+      </items>
+      <VBox.margin>
+         <Insets top="-47.0" />
+      </VBox.margin>
+   </MenuButton>
+   <Button mnemonicParsing="false" text="Calcular" />
+</VBox>

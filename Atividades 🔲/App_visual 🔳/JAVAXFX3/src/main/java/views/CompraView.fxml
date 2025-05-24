@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="277.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="26.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Converta Fahrenheit:">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <TextField layoutX="26.0" layoutY="66.0" />
+      <TextField layoutX="251.0" layoutY="66.0" />
+      <Text layoutX="250.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor convertido em C:">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <TextField layoutX="26.0" layoutY="149.0" />
+      <Text layoutX="254.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor Convertido em Fahrenheit:">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <TextField layoutX="251.0" layoutY="148.0" />
+      <Text layoutX="26.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Converta C:">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="-6.0" layoutY="227.0" stroke="BLACK" strokeType="INSIDE" width="440.0" />
+      <Button layoutX="194.0" layoutY="66.0" mnemonicParsing="false" text="Para" />
+      <Button layoutX="194.0" layoutY="149.0" mnemonicParsing="false" text="Para" />
+   </children>
+</AnchorPane>
