@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banco de Imagens</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1 fs-2 mx-auto">Banco de Imagens</span>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Banco de Imagens</h2>
+    <form id="formCadastro" class="card p-3">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" placeholder="Digite o nome" />
+      </div>
+      <div class="mb-3">
+        <label for="imagem" class="form-label">Imagem (URL)</label>
+        <input type="text" class="form-control" id="imagem" placeholder="Digite a URL da imagem" />
+      </div>
+      <button type="submit" class="btn btn-primary">Adicionar</button>
+    </form>
+
+    <h2 class="mt-5 mb-3">Imagens</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>URL da Imagem</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaCorpo"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const apiUrl = 'http://localhost:8080/api/bancoimagens';
+    let alunoEmEdicaoId = null;
+
+    window.onload = () => {
+      fetch(apiUrl)
+        .then(res => res.json())
+        .then(data => {
+          data.forEach(imagem => adicionarLinhaNaTabela(imagem));
+        })
+        .catch(err => console.error('Erro ao listar imagens:', err));
+    };
+
+    document.getElementById('formCadastro').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const url = document.getElementById('imagem').value.trim();  
+
+      if (!nome || !url) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+      }
+
+      if (!isValidURL(url)) {
+        alert("Por favor, insira uma URL válida para a imagem.");
+        return;
+      }
+
+      const imagemObj = { nome, url };
+
+      if (alunoEmEdicaoId) {
+        fetch(`${apiUrl}/${alunoEmEdicaoId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(imagemObj)
+        })
+          .then(res => res.json())
+          .then(imagemAtualizada => {
+            atualizarLinhaNaTabela(imagemAtualizada);
+            resetarFormulario();
+          })
+          .catch(err => console.error('Erro ao editar imagem:', err));
+      } else {
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(imagemObj)
+        })
+          .then(res => res.json())
+          .then(imagemCriada => {
+            adicionarLinhaNaTabela(imagemCriada);
+            document.getElementById('formCadastro').reset();
+          })
+          .catch(err => console.error('Erro ao cadastrar imagem:', err));
+      }
+    });
+
+    function adicionarLinhaNaTabela(imagem) {
+      const tabela = document.getElementById('tabelaCorpo');
+      const novaLinha = document.createElement('tr');
+      novaLinha.setAttribute('data-id', imagem.id);
+
+      novaLinha.innerHTML = `
+        <td>${imagem.nome}</td>
+        <td><img src="${imagem.url}"  class="img-thumbnail" style="max-width: 150px;"></img></td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" onclick="editarImagem(${imagem.id}, this)">Editar</button>
+          <button class="btn btn-sm btn-danger" onclick="removerImagem(${imagem.id}, this)">Remover</button>
+        </td>
+      `;
+
+      tabela.appendChild(novaLinha);
+    }
+
+    function atualizarLinhaNaTabela(imagemAtualizada) {
+      const linha = document.querySelector(`tr[data-id="${imagemAtualizada.id}"]`);
+      if (linha) {
+        linha.children[0].textContent = imagemAtualizada.nome;
+        linha.children[1].innerHTML = `<a href="${imagemAtualizada.url}" target="_blank">Ver Imagem</a>`;
+      }
+    }
+
+    function editarImagem(id, botao) {
+      const linha = botao.closest('tr');
+      const nome = linha.children[0].textContent;
+      const imagem = linha.children[1].textContent;
+
+      document.getElementById('nome').value = nome;
+      document.getElementById('imagem').value = imagem;
+
+      alunoEmEdicaoId = id;
+      document.querySelector('#formCadastro button[type="submit"]').textContent = 'Salvar Alterações';
+    }
+
+    function resetarFormulario() {
+      document.getElementById('formCadastro').reset();
+      alunoEmEdicaoId = null;
+      document.querySelector('#formCadastro button[type="submit"]').textContent = 'Adicionar';
+    }
+
+    function removerImagem(id, botao) {
+      fetch(`${apiUrl}/${id}`, { method: 'DELETE' })
+        .then(res => {
+          if (res.status === 204) {
+            const linha = botao.closest('tr');
+            linha.remove();
+          } else {
+            alert("Erro ao remover imagem.");
+          }
+        })
+        .catch(err => console.error('Erro ao remover imagem:', err));
+    }
+
+    function isValidURL(url) {
+      try {
+        new URL(url);
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+  </script>
+</body>
+
+</html>
