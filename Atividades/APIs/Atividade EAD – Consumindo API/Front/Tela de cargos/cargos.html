@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Tela De Cargos</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-image: url(
+          https://escolaeducacao.com.br/wp-content/uploads/2020/01/ilusao-de-otica-15.jpg
+          );
+      }
+      h1 {
+          justify-content: center;
+          padding: 5px;
+      }
+      button {
+          justify-content: center;
+          padding: 5px;
+          border-radius: 5px;
+          margin: 5px 0;
+          cursor: pointer;
+      }
+      div {
+          
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 40px;
+          padding: 20px;
+      }
+
+      form {
+          background-color: rgba(255, 255, 255, 0.95);
+          padding: 30px;
+          border-radius: 12px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+          max-width: 240px;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+      }
+      table {
+          background-color: hsla(240, 1%, 52%, 0.918);
+          padding: 15px;
+          text-align: center;
+          font-size: 18px;
+          color: black;
+          border-collapse: collapse;
+          width: 100%;
+          max-width: 600px;
+      }
+      th,
+      td {
+          border: 1px solid rgba(121, 121, 121, 0.3);
+          padding: 8px;
+      }
+      th {
+          border-style: none none solid none;
+          border-color: rgba(121, 121, 121, 0.137);
+          font-size: 20px;
+      }
+      p {
+          margin: 5px 0;
+          background-color: rgba(255, 255, 255, 0.95);
+          padding: 10px;
+          border-radius: 12px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+          max-width: 200px;
+          width: 100%;
+      }
+
+      input[type='text'] {
+          padding: 10px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin-bottom: 20px;
+          width: 100%;
+          box-sizing: border-box;
+      }
+    </style>
+</head>
+<body>
+  <div>
+    <form id="cargos">
+      <h1>Gestão de Cargos</h1>
+      <label for="nome">Nome</label><br />
+      <input type="text" id="nome1" name="nome1" required /><br />
+      <label for="descricao">Descrição</label><br />
+      <input type="text" id="descricao1" name="descricao1" required /><br />
+      <button type="submit">Adicionar</button>
+    </form>
+  </div>
+
+  <div>
+    <h1>Tabela de Cadastros</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaCorpo"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const form = document.getElementById('cargos');
+    const tbody = document.getElementById('tabelaCorpo');
+
+    let idCounter = 1; // contador para gerar IDs
+    let editandoLinha = null; // referência à linha que está sendo editada
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nome = document.getElementById('nome1').value.trim();
+      const descricao = document.getElementById('descricao1').value.trim();
+
+      if (!nome || !descricao) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      if(editandoLinha){
+        // Atualiza linha existente
+        editandoLinha.cells[1].textContent = nome;
+        editandoLinha.cells[2].textContent = descricao;
+        editandoLinha = null;
+        form.querySelector('button[type="submit"]').textContent = 'Adicionar';
+      } else {
+        // Adiciona nova linha
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>${idCounter++}</td>
+          <td>${nome}</td>
+          <td>${descricao}</td>
+          <td>
+            <button class="btnExcluir">Excluir</button>
+            <button class="btnEditar">Editar</button>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      }
+
+      form.reset();
+    });
+
+    tbody.addEventListener('click', (e) => {
+      const linha = e.target.closest('tr');
+
+      if (e.target.classList.contains('btnExcluir')) {
+        if (confirm('Tem certeza que deseja excluir este cargo?')) {
+          if(editandoLinha === linha){
+            // Se estiver editando essa linha, cancela edição
+            editandoLinha = null;
+            form.reset();
+            form.querySelector('button[type="submit"]').textContent = 'Adicionar';
+          }
+          linha.remove();
+        }
+      } else if (e.target.classList.contains('btnEditar')) {
+        // Preenche o formulário com dados da linha para edição
+        document.getElementById('nome1').value = linha.cells[1].textContent;
+        document.getElementById('descricao1').value = linha.cells[2].textContent;
+        editandoLinha = linha;
+        form.querySelector('button[type="submit"]').textContent = 'Salvar';
+      }
+    });
+  </script>
+</body>
+</html>
