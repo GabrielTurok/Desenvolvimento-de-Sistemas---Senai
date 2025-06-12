@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("api/cargos")
+@RequestMapping("/api/cargos")
 public class CargosControls {
 
     @Autowired

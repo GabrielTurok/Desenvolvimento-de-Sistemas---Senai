@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Relatório de Vínculos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhA4gJsZjnT9Pky6UCM_DU9cYWwLEEm294iw&s');
+      background-size: cover;
+      background-position: center;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+      color: #000;
+      background-color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      padding: 30px 20px;
+    }
+
+    .filtros, .relatorio {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 800px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Relatório de Vínculos</h1>
+
+  <div class="container">
+    <div class="filtros">
+      <label for="funcionarioFiltro">Filtrar por Funcionário:</label>
+      <select id="funcionarioFiltro">
+        <option value="">-- Todos --</option>
+      </select>
+
+      <label for="cargoFiltro">Filtrar por Cargo:</label>
+      <select id="cargoFiltro">
+        <option value="">-- Todos --</option>
+      </select>
+
+      <button onclick="buscarVinculos()">Buscar</button>
+    </div>
+
+    <div class="relatorio">
+      <table>
+        <thead>
+          <tr>
+            <th>Funcionário</th>
+            <th>Cargo</th>
+            <th>Data Início</th>
+            <th>Data Fim</th>
+            <th>Detalhes</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaRelatorio">
+          <tr><td colspan="5">Nenhum resultado.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const funcionarioSelect = document.getElementById('funcionarioFiltro');
+    const cargoSelect = document.getElementById('cargoFiltro');
+    const tabela = document.getElementById('tabelaRelatorio');
+
+    async function carregarFuncionarios() {
+      try {
+        const res = await fetch('http://localhost:8080/api/funcionarios');
+        const data = await res.json();
+        data.forEach(f => {
+          const opt = document.createElement('option');
+          opt.value = f.id;
+          opt.textContent = f.nome;
+          funcionarioSelect.appendChild(opt);
+        });
+      } catch (e) {
+        console.error("Erro ao carregar funcionários", e);
+      }
+    }
+
+    async function carregarCargos() {
+      try {
+        const res = await fetch('http://localhost:8080/api/cargos');
+        const data = await res.json();
+        data.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = c.nome;
+          cargoSelect.appendChild(opt);
+        });
+      } catch (e) {
+        console.error("Erro ao carregar cargos", e);
+      }
+    }
+
+    async function buscarVinculos() {
+      const funcionarioId = funcionarioSelect.value;
+      const cargoId = cargoSelect.value;
+
+      try {
+        const res = await fetch('http://localhost:8080/api/funcCargos');
+        const vinculos = await res.json();
+
+        const filtrados = vinculos.filter(v =>
+          (!funcionarioId || v.funcionario.id == funcionarioId) &&
+          (!cargoId || v.cargo.id == cargoId)
+        );
+
+        tabela.innerHTML = '';
+
+        if (filtrados.length === 0) {
+          tabela.innerHTML = '<tr><td colspan="5">Nenhum vínculo encontrado.</td></tr>';
+          return;
+        }
+
+        filtrados.forEach(v => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${v.funcionario.nome}</td>
+            <td>${v.cargo.nome}</td>
+            <td>${v.data_inicio}</td>
+            <td>${v.data_fim || '-'}</td>
+            <td>${v.detalhes || '-'}</td>
+          `;
+          tabela.appendChild(tr);
+        });
+
+      } catch (err) {
+        console.error("Erro ao buscar vínculos:", err);
+        tabela.innerHTML = '<tr><td colspan="5">Erro ao carregar dados.</td></tr>';
+      }
+    }
+
+    carregarFuncionarios();
+    carregarCargos();
+  </script>
+</body>
+</html>

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("api/funcionarios")
+@RequestMapping("/api/funcionarios")
 public class FuncionarioControls {
 
     @Autowired

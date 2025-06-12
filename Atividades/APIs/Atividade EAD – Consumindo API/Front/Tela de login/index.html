@@ -1,58 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <title>Tela De Login</title>
-    <meta charset="utf-8">
-  </head>
-  <body>
-    <div>
-        <form>
-            <h1>LOGIN</h1>
-            <p>Email: <input type="email" name="email" id="email"></p>
-            <p>Senha: <input type="password" name="senha" id="senha"></p>
-            <p><input type="submit" value="Enviar"></p>
-        </form>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tela De Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhA4gJsZjnT9Pky6UCM_DU9cYWwLEEm294iw&s');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-weight: bold;
+      font-size: 2.2rem;
+      color: #222;
+      text-align: center;
+      width: 100%;
+    }
+
+    p {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      padding: 12px 0;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <form>
+      <h1>LOGIN</h1>
+      <p>Email: <input type="email" name="email" id="email" required></p>
+      <p>Senha: <input type="password" name="senha" id="senha" required></p>
+      <p><input type="submit" value="Enviar"></p>
+    </form>
+  </div>
+</body>
 </html>
-<style>
-body {
-        font-family: Arial, sans-serif;
-      }
-      h1 {
-        justify-content: center;
-        padding: 5px;
-      }
-      div {
-        background-image: url(https://escolaeducacao.com.br/wp-content/uploads/2020/01/ilusao-de-otica-15.jpg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-
-      form {
-        background-color: rgba(255, 255, 255, 0.95);
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        max-width: 400px;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-      }
-
-      p {
-        margin: 5px 0;
-        background-color: rgba(255, 255, 255, 0.95);
-        padding: 10px;
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        max-width: 200px;
-        width: 100%;
-      }
-
-      input {
-        padding: 5px;
-      }
-</style>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Vínculo Funcionário-Cargo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 10px;
+      margin: 0;
+    }
+
+    .container {
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhA4gJsZjnT9Pky6UCM_DU9cYWwLEEm294iw&s');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label, select, input, textarea, button {
+      font-size: 16px;
+      width: 100%;
+    }
+
+    select, input, textarea {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 80px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 800px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="vinculoForm">
+      <h1>Cadastro de Vínculo</h1>
+      <label for="funcionarioSelect">Funcionário</label>
+      <select id="funcionarioSelect" required></select>
+
+      <label for="cargoSelect">Cargo</label>
+      <select id="cargoSelect" required></select>
+
+      <label for="dataInicio">Data de Início</label>
+      <input type="date" id="dataInicio" required />
+
+      <label for="detalhes">Detalhes</label>
+      <textarea id="detalhes" placeholder="Digite mais detalhes..."></textarea>
+
+      <button type="submit">Adicionar Vínculo</button>
+    </form>
+
+    <h1>Vínculos Cadastrados</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Funcionário</th>
+          <th>Cargo</th>
+          <th>Data Início</th>
+          <th>Detalhes</th>
+        </tr>
+      </thead>
+      <tbody id="vinculosTableBody">
+        <tr><td colspan="5">Carregando...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const funcionarioSelect = document.getElementById('funcionarioSelect');
+    const cargoSelect = document.getElementById('cargoSelect');
+    const form = document.getElementById('vinculoForm');
+    const tableBody = document.getElementById('vinculosTableBody');
+
+    async function carregarFuncionarios() {
+      try {
+        const res = await fetch('http://localhost:8080/api/funcionarios');
+        const funcionarios = await res.json();
+        funcionarioSelect.innerHTML = '<option value="">-- Selecione --</option>';
+        funcionarios.forEach(f => {
+          const opt = document.createElement('option');
+          opt.value = f.id;
+          opt.textContent = f.nome;
+          funcionarioSelect.appendChild(opt);
+        });
+      } catch (err) {
+        funcionarioSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+        console.error(err);
+      }
+    }
+
+    async function carregarCargos() {
+      try {
+        const res = await fetch('http://localhost:8080/api/cargos');
+        const cargos = await res.json();
+        cargoSelect.innerHTML = '<option value="">-- Selecione --</option>';
+        cargos.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = c.nome;
+          cargoSelect.appendChild(opt);
+        });
+      } catch (err) {
+        cargoSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+        console.error(err);
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const funcionarioId = funcionarioSelect.value;
+      const cargoId = cargoSelect.value;
+      const dataInicio = document.getElementById('dataInicio').value;
+      const detalhes = document.getElementById('detalhes').value;
+
+      if (!funcionarioId || !cargoId || !dataInicio) {
+        alert("Preencha todos os campos obrigatórios.");
+        return;
+      }
+
+      const vinculo = {
+        funcionario: { id: funcionarioId },
+        cargo: { id: cargoId },
+        data_inicio: dataInicio,
+        detalhes: detalhes || null
+      };
+
+      try {
+        await fetch('http://localhost:8080/api/funcCargos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(vinculo)
+        });
+        alert("Vínculo cadastrado com sucesso!");
+        form.reset();
+        carregarVinculos();
+      } catch (err) {
+        console.error("Erro ao cadastrar vínculo:", err);
+        alert("Erro ao cadastrar vínculo.");
+      }
+    });
+
+    async function carregarVinculos() {
+      try {
+        const res = await fetch('http://localhost:8080/api/funcCargos');
+        const vinculos = await res.json();
+        tableBody.innerHTML = "";
+        vinculos.forEach((v, i) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${i + 1}</td>
+            <td>${v.funcionario.nome}</td>
+            <td>${v.cargo.nome}</td>
+            <td>${v.data_inicio}</td>
+            <td>${v.detalhes || '-'}</td>
+          `;
+          tableBody.appendChild(tr);
+        });
+      } catch (err) {
+        console.error("Erro ao carregar vínculos:", err);
+        tableBody.innerHTML = '<tr><td colspan="5">Erro ao carregar dados</td></tr>';
+      }
+    }
+
+    carregarFuncionarios();
+    carregarCargos();
+    carregarVinculos();
+  </script>
+</body>
+</html>
